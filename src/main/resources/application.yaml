@@ -1,0 +1,22 @@
+rate:
+  limits:
+    defaultMaxCallsAllowed: 20
+    defaultTimeUnit: SECONDS
+    throttleRateMap:
+      getDeveloperDetails:
+        - user: user1
+          maxCallsAllowed: 3
+          timeUnit: SECONDS
+        - user: user2
+          maxCallsAllowed: 5
+          timeUnit: MINUTES
+      getOrganizationDetails:
+        - user: user1
+          maxCallsAllowed: 3
+          timeUnit: SECONDS
+        - user: user4
+          maxCallsAllowed: 2
+          timeUnit: SECONDS
+
+
+
