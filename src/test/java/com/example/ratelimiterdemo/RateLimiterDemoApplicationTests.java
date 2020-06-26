@@ -12,6 +12,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.annotation.DirtiesContext;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.HttpStatus.TOO_MANY_REQUESTS;
+import static org.springframework.test.annotation.DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD;
 
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 class RateLimiterDemoApplicationTests {
@@ -49,7 +51,7 @@ class RateLimiterDemoApplicationTests {
     @Test
     public void testRateLimitingForDeveloperApiForUser1() {
         HttpHeaders headers = new HttpHeaders();
-        headers.set("user", "user1");
+        headers.set("user", user1);
         HttpEntity<String> entity = new HttpEntity<>(null, headers);
         List<HttpStatus> responseList = new ArrayList<>();
 
@@ -64,7 +66,7 @@ class RateLimiterDemoApplicationTests {
     @Test
     public void testRateLimitingForDeveloperApiForUser2() throws InterruptedException {
         HttpHeaders headers = new HttpHeaders();
-        headers.set("user", "user2");
+        headers.set("user", user2);
         HttpEntity<String> entity = new HttpEntity<>(null, headers);
         List<HttpStatus> responseList = new ArrayList<>();
 
@@ -89,9 +91,9 @@ class RateLimiterDemoApplicationTests {
     }
 
     @Test
-    public void testRateLimitingForOrganizationApiForUser1() {
+    public void testRateLimitingForOrganizationApiForUser2() {
         HttpHeaders headers = new HttpHeaders();
-        headers.set("user", "user2");
+        headers.set("user", user2);
         HttpEntity<String> entity = new HttpEntity<>(null, headers);
         List<HttpStatus> responseList = new ArrayList<>();
 
@@ -106,16 +108,16 @@ class RateLimiterDemoApplicationTests {
     @Test
     public void testDefaultRateLimitingForOrganizationApiForUser1() {
         HttpHeaders headers = new HttpHeaders();
-        headers.set("user", "user1");
+        headers.set("user", user1);
         HttpEntity<String> entity = new HttpEntity<>(null, headers);
         List<HttpStatus> responseList = new ArrayList<>();
 
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 11; i++) {
             ResponseEntity<Organization> responseEntity = restTemplate.exchange(organizationApi, GET, entity,
                     Organization.class, "12345");
             responseList.add(responseEntity.getStatusCode());
         }
-        assertThat(responseList).containsExactly(OK, OK, OK, OK, OK, TOO_MANY_REQUESTS);
+        assertThat(responseList).containsExactly(OK, OK, OK, OK, OK, OK, OK, OK, OK, OK, TOO_MANY_REQUESTS);
     }
 
     @Test
@@ -124,11 +126,11 @@ class RateLimiterDemoApplicationTests {
         HttpEntity<String> entity = new HttpEntity<>(null, headers);
         List<HttpStatus> responseList = new ArrayList<>();
 
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 11; i++) {
             ResponseEntity<Developer> responseEntity = restTemplate.exchange(developerApi, GET, entity,
                     Developer.class, "12345");
             responseList.add(responseEntity.getStatusCode());
         }
-        assertThat(responseList).containsExactly(OK, OK, OK, OK, OK, TOO_MANY_REQUESTS);
+        assertThat(responseList).containsExactly(OK, OK, OK, OK, OK, OK, OK, OK, OK, OK, TOO_MANY_REQUESTS);
     }
 }

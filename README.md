@@ -26,7 +26,7 @@ rate:
   limits:
     defaultMaxCallsAllowed: 20
     defaultTimeUnit: SECONDS
-    throttleRateMap:
+    rateLimitMap:
       getDeveloperDetails:
         - user: user1
           maxCallsAllowed: 3

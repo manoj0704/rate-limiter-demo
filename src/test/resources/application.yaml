@@ -3,9 +3,9 @@ logging:
     root: INFO
 rate:
   limits:
-    defaultMaxCallsAllowed: 5
-    defaultTimeUnit: SECONDS
-    throttleRateMap:
+    defaultMaxCallsAllowed: 10
+    defaultTimeUnit: MINUTES
+    rateLimitMap:
       getDeveloperDetails:
         - user: user1
           maxCallsAllowed: 2

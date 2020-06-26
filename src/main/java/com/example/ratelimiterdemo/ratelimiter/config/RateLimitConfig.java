@@ -23,5 +23,5 @@ import java.util.concurrent.TimeUnit;
 public class RateLimitConfig {
     private Integer defaultMaxCallsAllowed;
     private TimeUnit defaultTimeUnit;
-    private Map<String, Set<UserRateLimit>> throttleRateMap = new HashMap<>();
+    private Map<String, Set<UserRateLimit>> rateLimitMap = new HashMap<>();
 }

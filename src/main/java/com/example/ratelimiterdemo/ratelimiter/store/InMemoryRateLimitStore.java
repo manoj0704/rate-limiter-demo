@@ -24,7 +24,7 @@ public class InMemoryRateLimitStore implements RateLimitStore {
     public void initStore(RateLimitConfig rateLimitConfig) {
         rateLimitMap = new HashMap<>();
 
-        for (Entry<String, Set<UserRateLimit>> entry : rateLimitConfig.getThrottleRateMap().entrySet()) {
+        for (Entry<String, Set<UserRateLimit>> entry : rateLimitConfig.getRateLimitMap().entrySet()) {
             String api = entry.getKey();
             Set<UserRateLimit> userRateLimits = entry.getValue();
 
