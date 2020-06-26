@@ -1,7 +1,11 @@
-# Read Me First
-rate-limiter-demo application provides an example implementation of the rate limiter library. 
+# Rate-Limiter-Demo
+rate-limiter-demo application provides an example implementation of the rate limiter library.
 
-## How to enable Rate Limiting for an API?
+# Table of contents
+1. [How to enable Rate Limiting for an API?](#howToEnable)
+2. [Getting Started](#gettingStarted)
+
+# How to enable Rate Limiting for an API? <a name="howToEnable"></a>
 Use ```@EnableRateLimit``` annotation on the API method. Also provide a
 unique identifier for the API. The API name must match the API Name provided 
 in the ```application.yaml```
@@ -55,7 +59,7 @@ curl --location --request GET 'localhost:8080/api/v1/developers/12345' \
 --header 'user: user2'
 ```
 
-# Getting Started
+# Getting Started <a name="gettingStarted"></a>
 
 ## Requirements
 * Java 11
