@@ -4,6 +4,7 @@ rate-limiter-demo application provides an example implementation of the rate lim
 # Table of contents
 1. [How to enable Rate Limiting for an API?](#howToEnable)
 2. [Getting Started](#gettingStarted)
+3. [Installing lombok plugins](#installingLombok)
 
 # How to enable Rate Limiting for an API? <a name="howToEnable"></a>
 Use ```@EnableRateLimit``` annotation on the API method. Also provide a
@@ -64,6 +65,7 @@ curl --location --request GET 'localhost:8080/api/v1/developers/12345' \
 ## Requirements
 * Java 11
 * Maven 3.6.3
+* Lombok plugins
 
 ## How to build source using maven?
 ```mvn clean install```
@@ -78,6 +80,9 @@ Execute archive ```java -jar target/rate-limiter-demo.jar```
 ## How to run the application using IDE?
 Run ```RateLimiterDemoApplication.java```
 
+# Installing lombok plugins <a name="installingLombok"></a>
+[Eclipse](https://projectlombok.org/setup/eclipse)
+[IntelliJ](https://projectlombok.org/setup/intellij)
 
 
 
