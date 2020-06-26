@@ -24,9 +24,6 @@ public class InMemoryRateLimitStore implements RateLimitStore {
     public void initStore(RateLimitConfig rateLimitConfig) {
         rateLimitMap = new HashMap<>();
 
-        UserUtilizationStatus defaultUserUtilizationStatus = new UserUtilizationStatus(
-                rateLimitConfig.getDefaultMaxCallsAllowed(), rateLimitConfig.getDefaultTimeUnit());
-
         for (Entry<String, Set<UserRateLimit>> entry : rateLimitConfig.getThrottleRateMap().entrySet()) {
             String api = entry.getKey();
             Set<UserRateLimit> userRateLimits = entry.getValue();
@@ -40,6 +37,8 @@ public class InMemoryRateLimitStore implements RateLimitStore {
             }
 
             //Handle Default Rate
+            UserUtilizationStatus defaultUserUtilizationStatus = new UserUtilizationStatus(
+                    rateLimitConfig.getDefaultMaxCallsAllowed(), rateLimitConfig.getDefaultTimeUnit());
             userUtilizationStatusMap.put(null, defaultUserUtilizationStatus);
             rateLimitMap.put(api, userUtilizationStatusMap);
         }

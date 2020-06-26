@@ -34,6 +34,5 @@ class DeveloperApiTest {
 
         assertThat(response.getStatusCode()).isEqualTo(OK);
         assertThat(response.getBody()).isEqualToComparingFieldByField(expectedDeveloper);
-
     }
 }

@@ -1,5 +1,7 @@
 package com.example.ratelimiterdemo.ratelimiter.model;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -8,6 +10,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import static java.lang.System.currentTimeMillis;
 
+@Slf4j
 public class UserUtilizationStatus {
 
     private final int maxCallsAllowed;
@@ -38,6 +41,7 @@ public class UserUtilizationStatus {
         lock.writeLock().lock();
         try {
             if (requestTimestamps.size() < maxCallsAllowed) {
+                log.debug("currentSize={}, maxCapacity={}", requestTimestamps.size(), maxCallsAllowed);
                 requestTimestamps.add(currentTimeMillis());
                 return true;
             } else {
